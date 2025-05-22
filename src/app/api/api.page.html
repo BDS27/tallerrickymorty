@@ -1,0 +1,71 @@
+<ion-content class="ion-padding modern-content" *ngIf="details">
+  <div class="profile-card">
+    <div class="avatar-wrapper">
+      <img
+        [src]="details.imageUrl"
+        alt="Imagen de {{ details.name }}"
+        class="avatar-image"
+      />
+    </div>
+
+    <h2 class="profile-name">{{ details.name | titlecase }}</h2>
+
+    <ion-list lines="none" class="info-list">
+      <ion-item>
+        <ion-label><strong>Estado:</strong></ion-label>
+        <ion-text color="dark">{{ details.status }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label><strong>Tipo:</strong></ion-label>
+        <ion-text color="dark">{{ details.type || 'Desconocido' }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label><strong>Especie:</strong></ion-label>
+        <ion-text color="dark">{{ details.species }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label><strong>Género:</strong></ion-label>
+        <ion-text color="dark">{{ details.gender }}</ion-text>
+      </ion-item>
+    </ion-list>
+
+    <div class="comment-box">
+      <h3 class="comment-title">💬 Tu comentario</h3>
+      <ion-textarea
+        [(ngModel)]="comment"
+        placeholder="Escribe algo sobre este personaje..."
+        autoGrow="true"
+        class="modern-textarea"
+      ></ion-textarea>
+
+      <ion-button
+        expand="block"
+        color="secondary"
+        (click)="saveComment()"
+        [disabled]="!comment.trim()"
+      >
+        Guardar Comentario
+      </ion-button>
+
+      <ion-card *ngIf="savedComment" class="user-comment">
+        <ion-card-content>
+          <ion-icon name="chatbubbles-outline"></ion-icon>
+          {{ savedComment }}
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <ion-button
+      expand="block"
+      color="success"
+      class="save-character-btn"
+      (click)="saveCharacter()"
+    >
+      💾 Guardar en Firebase
+    </ion-button>
+
+    <ion-text *ngIf="savedSuccessfully" color="success" class="confirmation-msg">
+      Personaje guardado.
+    </ion-text>
+  </div>
+</ion-content>

@@ -1,0 +1,31 @@
+<ion-content class="ion-padding custom-content">
+  <div class="card">
+    <h1 class="title">Buscar Personaje</h1>
+
+    <div class="input-group">
+      <ion-input
+        placeholder="Nombre del personaje"
+        [(ngModel)]="searchName"
+        (keydown.enter)="searchMorty()"
+        class="custom-input"
+      ></ion-input>
+      <ion-button expand="block" color="primary" (click)="searchMorty()">🔍 Buscar</ion-button>
+    </div>
+
+    <ion-text color="danger" *ngIf="errorMessage">
+      <p class="error-message">{{ errorMessage }}</p>
+    </ion-text>
+
+    <div *ngIf="selectedapi" class="result-card">
+      <img
+        [src]="selectedapi.imageUrl"
+        alt="Imagen de {{ selectedapi.name }}"
+        class="morty-img"
+      />
+      <h2>{{ selectedapi.name | titlecase }}</h2>
+      <ion-button [href]="'/api/' + selectedapi.id" target="_blank" color="tertiary">
+        Ver detalles
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
